@@ -1,21 +1,33 @@
-import io from 'socket.io-client'
+import io from "socket.io-client";
+import { Environment } from "./Environment";
 
-const socket = io('http://localhost:3000')
+const currentEnvironment = Environment.Production;
 
-document.getElementById('sendButton')?.addEventListener('click', () => {
-  const messageInput = document.getElementById(
-    'messageInput'
-  ) as HTMLInputElement
-  const message = messageInput.value
-  socket.emit('message', message)
-  messageInput.value = ''
-})
+console.log(`Current environment: ${currentEnvironment}`);
 
-socket.on('message', (data: string) => {
-  const messages = document.getElementById('messages')
-  if (messages) {
-    const li = document.createElement('li')
-    li.textContent = data
-    messages.appendChild(li)
-  }
-})
+const url =
+    currentEnvironment === Environment.Production
+        ? "https://atari-monk-socket-io-server.azurewebsites.net"
+        : "http://localhost:3000";
+
+console.log(`Current url: ${url}`);
+
+const socket = io(url);
+
+document.getElementById("sendButton")?.addEventListener("click", () => {
+    const messageInput = document.getElementById(
+        "messageInput"
+    ) as HTMLInputElement;
+    const message = messageInput.value;
+    socket.emit("message", message);
+    messageInput.value = "";
+});
+
+socket.on("message", (data: string) => {
+    const messages = document.getElementById("messages");
+    if (messages) {
+        const li = document.createElement("li");
+        li.textContent = data;
+        messages.appendChild(li);
+    }
+});
