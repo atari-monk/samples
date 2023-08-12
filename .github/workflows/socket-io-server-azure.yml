@@ -1,4 +1,4 @@
-name: Deploy atari-monk-socket-io-server to Azure
+name: Deploy sample server to Azure
 "on":
     push:
         branches:
