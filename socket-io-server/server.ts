@@ -4,7 +4,13 @@ import * as http from 'http'
 import cors from 'cors'
 
 const app = express()
-app.use(cors({ origin: 'http://127.0.0.1:3000' }))
+
+const allowedOrigins = [
+    "http://127.0.0.1:3000",
+    "https://atari-monk.github.io",
+];
+
+app.use(cors({ origin: allowedOrigins }))
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache')
   res.setHeader('Pragma', 'no-cache')
@@ -14,7 +20,7 @@ app.use((req, res, next) => {
 const server = http.createServer(app)
 const io = new Server(server, {
   cors: {
-    origin: 'http://127.0.0.1:3000',
+    origin: allowedOrigins,
     methods: ['GET', 'POST'],
     credentials: true,
   },
