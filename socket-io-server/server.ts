@@ -25,7 +25,7 @@ io.on('connection', (socket: Socket) => {
 
   socket.on('message', (data: string) => {
     console.log('Received message:', data)
-    io.emit('message', data) // Broadcast the message to all connected clients
+    io.emit('message', data)
   })
 
   socket.on('disconnect', () => {
