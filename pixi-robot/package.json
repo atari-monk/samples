@@ -19,7 +19,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "atari-monk-ball-game-lib": "^0.0.2",
+    "atari-monk-ball-game-lib": "file:atari-monk-ball-game-lib-0.0.2.tgz",
     "pixi.js": "^7.2.4",
     "reflect-metadata": "^0.1.13"
   }

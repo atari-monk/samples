@@ -2,9 +2,8 @@ import 'reflect-metadata'
 import * as PIXI from 'pixi.js'
 import {
   AppHelper,
-  BallGame,
-  Collider,
   GameObjectManager,
+  SpriteDemo,
   appHelperParams,
   getCanvasForPixi,
   getPixiAppParams,
@@ -23,6 +22,5 @@ const robot = new Robot(pixiApp, robotBody)
 gameObjectManager.addGameObject(robot)
 
 appHelper.initializeApp(pixiApp)
-const game = new BallGame(pixiApp, gameObjectManager, new Collider())
-game.setBallGameObjects()
+const game = new SpriteDemo(pixiApp, gameObjectManager)
 appHelper.startAnimationLoop(game)
