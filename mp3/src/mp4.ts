@@ -7,9 +7,11 @@ async function downloadYouTubeVideo(
 ): Promise<void> {
   return new Promise<void>(async (resolve, reject) => {
     try {
+      const formatCode = '22' // Change this to the desired format code (e.g., '22' for 720p video with audio).
+
       const videoInfo = await ytdl.getInfo(url)
       const format = ytdl.chooseFormat(videoInfo.formats, {
-        quality: 'highest',
+        quality: formatCode,
       })
 
       if (!format) {
@@ -38,7 +40,7 @@ async function downloadYouTubeVideo(
 
 const factotum = 'otRKSRgAmug&list=WL&index=19'
 const regret = '1lpFYv19Kt4&list=SS&index=2'
-const url = `https://www.youtube.com/watch?v=${regret}`
+const url = `https://www.youtube.com/watch?v=${factotum}`
 const destination = 'vid.mp4' // Replace with your desired destination file
 
 downloadYouTubeVideo(url, destination)
