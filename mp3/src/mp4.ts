@@ -1,5 +1,6 @@
 import * as fs from 'fs'
 import ytdl from 'ytdl-core'
+import { lib } from './data'
 
 async function downloadYouTubeVideo(
   url: string,
@@ -38,9 +39,7 @@ async function downloadYouTubeVideo(
   })
 }
 
-const factotum = 'otRKSRgAmug&list=WL&index=19'
-const regret = '1lpFYv19Kt4&list=SS&index=2'
-const url = `https://www.youtube.com/watch?v=${factotum}`
+const url = `https://www.youtube.com/watch?v=${lib.bukowski.postOffice.link}`
 const destination = 'vid.mp4' // Replace with your desired destination file
 
 downloadYouTubeVideo(url, destination)
