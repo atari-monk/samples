@@ -106,3 +106,24 @@ const bukowski: Bukowski = {
 In this code, we first define the Factotum interface to represent the structure of the factotum property within the bukowski object. Then, we define the Bukowski interface, which specifies that the bukowski object has a factotum property with the structure defined by the Factotum interface.
 
 This allows you to strongly type the bukowski object and ensure that it conforms to the expected structure defined in the interfaces.
+
+how to do a getter in ts ?
+ChatGPT
+In TypeScript, you can define a getter method in a class using the get keyword followed by a property name. A getter allows you to access the value of a class property like a regular property, but it runs a function to compute the value dynamically. Here's the basic syntax for defining a getter:
+
+typescript
+Copy code
+class MyClass {
+  private _myProperty: string = "Hello, world!";
+
+  // Getter method
+  get myProperty(): string {
+    return this._myProperty;
+  }
+}
+
+const myInstance = new MyClass();
+console.log(myInstance.myProperty); // Accessing the getter
+In this example, we define a myProperty getter that returns the value of the private _myProperty property. To access the value of myProperty, you simply call it like a regular property.
+
+Getters are useful when you want to perform some logic or calculations when accessing a class property, or when you want to hide the implementation details of a property behind a getter method. You can also use them to make a property read-only by omitting the corresponding setter.
