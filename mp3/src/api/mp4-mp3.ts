@@ -1,9 +1,9 @@
 import ffmpeg from 'fluent-ffmpeg'
-import { IItem } from './api/IItem'
-import { getItem, lib } from './data'
+import { getCurrentItem } from '../data'
 
-function convertVideoToMp3(item: IItem): Promise<void> {
-  return new Promise<void>((resolve, reject) => {
+export async function convertMp4ToMp3(): Promise<void> {
+  return new Promise<void>(async (resolve, reject) => {
+    const item = getCurrentItem()
     ffmpeg()
       .input(item.videoOut)
       .audioCodec('libmp3lame')
@@ -19,6 +19,3 @@ function convertVideoToMp3(item: IItem): Promise<void> {
       .save(item.audioOut)
   })
 }
-
-const item = getItem(lib.ian_mcklellen.acting_shakespeare)
-convertVideoToMp3(item)

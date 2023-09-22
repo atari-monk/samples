@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "mp4": "node ./build/mp4.js",
-    "mp3": "node ./build/mp4-mp3.js"
+    "mp4": "node ./build/get-mp4.js",
+    "mp3": "node ./build/get-mp3.js",
+    "media": "node ./build/get-mp4-mp3.js"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,3 @@
-import { IItem } from './api/IItem'
 import { ILib } from './api/ILib'
 import { Quality } from './api/Quality'
 import { Rating } from './api/Rating'
@@ -7,7 +6,7 @@ import { VideoResolution } from './api/VideoResolution'
 const root = 'C:/atari-monk/'
 const video = root + 'video/'
 const audio = root + 'audio/'
-export const lib: ILib = {
+const lib: ILib = {
   charles_bukowski: {
     factotum: {
       name: 'factotum',
@@ -54,9 +53,22 @@ export const lib: ILib = {
       audioOut: audio + 'ian_mcklellen/acting_shakespeare.mp3',
     },
   },
+  robert_kiyosaki: {
+    rich_dad_poor_dad: {
+      name: 'rich_dad_poor_dad',
+      link: 'wF293QPbmvo',
+      quality: Quality.Bad,
+      rating: Rating.DontKnow,
+      description: 'financial topic book',
+      video_resolution: VideoResolution._360p,
+      videoOut: video + 'robert_kiyosaki/rich_dad_poor_dad.mp4',
+      audioOut: audio + 'robert_kiyosaki/rich_dad_poor_dad.mp3',
+    },
+  },
 }
 
-export function getItem(item?: IItem) {
+export function getCurrentItem() {
+  const item = lib.robert_kiyosaki.rich_dad_poor_dad
   if (!item) throw new Error('No such item in data!')
   return item
 }

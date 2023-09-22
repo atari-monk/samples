@@ -4,4 +4,5 @@ export enum Rating {
   Boring,
   NotFun,
   Master,
+  DontKnow
 }

@@ -1,11 +1,11 @@
 import * as fs from 'fs'
 import ytdl from 'ytdl-core'
-import { lib, getItem } from './data'
-import { IItem } from './api/IItem'
+import { getCurrentItem } from '../data'
 
-async function downloadYouTubeVideo(item: IItem): Promise<void> {
+export async function downloadMp4(): Promise<void> {
   return new Promise<void>(async (resolve, reject) => {
     try {
+      const item = getCurrentItem()
       const url = `https://www.youtube.com/watch?v=${item.link}`
       const videoInfo = await ytdl.getInfo(url)
       const format = ytdl.chooseFormat(videoInfo.formats, {
@@ -37,6 +37,3 @@ async function downloadYouTubeVideo(item: IItem): Promise<void> {
     }
   })
 }
-
-const item = getItem(lib.ian_mcklellen.acting_shakespeare)
-downloadYouTubeVideo(item)
