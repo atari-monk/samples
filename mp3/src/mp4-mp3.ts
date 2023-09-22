@@ -1,33 +1,24 @@
 import ffmpeg from 'fluent-ffmpeg'
+import { IItem } from './api/IItem'
+import { getItem, lib } from './data'
 
-function convertVideoToMp3(
-  inputFilePath: string,
-  outputFilePath: string
-): Promise<void> {
+function convertVideoToMp3(item: IItem): Promise<void> {
   return new Promise<void>((resolve, reject) => {
-    const mp3Stream = ffmpeg()
-      .input(inputFilePath)
+    ffmpeg()
+      .input(item.videoOut)
       .audioCodec('libmp3lame')
       .toFormat('mp3')
       .on('end', () => {
-        console.log(`Conversion finished. MP3 file saved as ${outputFilePath}`)
+        console.log(`Converted ${item.name} to ${item.audioOut}`)
         resolve()
       })
-      .on('error', (err) => {
-        console.error(`Error converting video to MP3: ${err.message}`)
-        reject(err)
+      .on('error', (error) => {
+        reject(error)
+        console.error(`Error converting ${item.name}: ${error}`)
       })
-      .save(outputFilePath)
+      .save(item.audioOut)
   })
 }
 
-const inputVideoPath = './vid.mp4' // Replace with the path to your input video
-const outputMp3Path = './audio.mp3' // Replace with the desired output MP3 file path
-
-convertVideoToMp3(inputVideoPath, outputMp3Path)
-  .then(() => {
-    console.log('Conversion completed successfully.')
-  })
-  .catch((error) => {
-    console.error(`Error: ${error}`)
-  })
+const item = getItem(lib.ian_mcklellen.acting_shakespeare)
+convertVideoToMp3(item)

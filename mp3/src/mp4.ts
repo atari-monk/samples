@@ -1,18 +1,15 @@
 import * as fs from 'fs'
 import ytdl from 'ytdl-core'
-import { lib } from './data'
+import { lib, getItem } from './data'
+import { IItem } from './api/IItem'
 
-async function downloadYouTubeVideo(
-  url: string,
-  destination: string
-): Promise<void> {
+async function downloadYouTubeVideo(item: IItem): Promise<void> {
   return new Promise<void>(async (resolve, reject) => {
     try {
-      const formatCode = '22' // Change this to the desired format code (e.g., '22' for 720p video with audio).
-
+      const url = `https://www.youtube.com/watch?v=${item.link}`
       const videoInfo = await ytdl.getInfo(url)
       const format = ytdl.chooseFormat(videoInfo.formats, {
-        quality: formatCode,
+        quality: item.video_resolution,
       })
 
       if (!format) {
@@ -22,16 +19,18 @@ async function downloadYouTubeVideo(
 
       const videoStream = ytdl(url, { format })
 
-      const writableStream = fs.createWriteStream(destination)
+      const writableStream = fs.createWriteStream(item.videoOut)
 
       videoStream.pipe(writableStream)
 
       writableStream.on('finish', () => {
         resolve()
+        console.log(`Downloaded ${item.name} to ${item.videoOut}`)
       })
 
-      videoStream.on('error', (err) => {
-        reject(err)
+      videoStream.on('error', (error) => {
+        reject(error)
+        console.error(`Error downloading ${item.name}: ${error}`)
       })
     } catch (error) {
       reject(error)
@@ -39,13 +38,5 @@ async function downloadYouTubeVideo(
   })
 }
 
-const url = `https://www.youtube.com/watch?v=${lib.bukowski.postOffice.link}`
-const destination = 'vid.mp4' // Replace with your desired destination file
-
-downloadYouTubeVideo(url, destination)
-  .then(() => {
-    console.log(`Downloaded ${url} to ${destination}`)
-  })
-  .catch((error) => {
-    console.error(`Error downloading ${url}: ${error}`)
-  })
+const item = getItem(lib.ian_mcklellen.acting_shakespeare)
+downloadYouTubeVideo(item)
