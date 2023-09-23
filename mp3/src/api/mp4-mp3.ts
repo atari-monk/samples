@@ -4,6 +4,9 @@ import { getCurrentItem } from '../data'
 export async function convertMp4ToMp3(): Promise<void> {
   return new Promise<void>(async (resolve, reject) => {
     const item = getCurrentItem()
+    if (!item.audioOut) {
+      throw new Error(`item ${item.name} dosent have audio path`)
+    }
     ffmpeg()
       .input(item.videoOut)
       .audioCodec('libmp3lame')

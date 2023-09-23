@@ -2590,3 +2590,42 @@ typescript
 Copy code
 const videoOut = video + 'ian_mcklellen/' + acting_shakespeare.name + '.mp4';
 This code concatenates the name property with the desired string parts to create the videoOut path. As long as acting_shakespeare.name is a string, this approach will work correctly.
+
+export enum VideoResolution {
+  _720p = 22,
+  _480p = 36,
+  _360p = 18,
+}
+ts, what is code for 1080 ?
+ChatGPT
+In your VideoResolution enum, it appears that you have defined resolutions using their corresponding video quality codes. To add a resolution for 1080p, you can simply add it to the enum like this:
+
+typescript
+Copy code
+export enum VideoResolution {
+  _720p = 22,
+  _480p = 36,
+  _360p = 18,
+  _1080p = 37, // You can assign any available code for 1080p
+}
+Just make sure to assign a unique and available code to _1080p. You can choose any code that is not already used within your application or system.
+
+
+
+
+User
+are u sure ? this is probably yt code
+ChatGPT
+You are correct; I apologize for the misunderstanding. The codes you provided appear to be related to YouTube video quality settings. In that context, the code "37" is indeed used for 1080p.
+
+So, you can define the 1080p resolution in your VideoResolution enum like this:
+
+typescript
+Copy code
+export enum VideoResolution {
+  _720p = 22,
+  _480p = 36,
+  _360p = 18,
+  _1080p = 37, // Code for 1080p on YouTube
+}
+Thank you for pointing that out, and I appreciate your understanding.

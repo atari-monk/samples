@@ -65,10 +65,39 @@ const lib: ILib = {
       audioOut: audio + 'robert_kiyosaki/rich_dad_poor_dad.mp3',
     },
   },
+  blender_art: {
+    low_poly_character1: {
+      name: 'low_poly_character1',
+      link: 'Z3vdQj06DGo',
+      quality: Quality.Ok,
+      rating: Rating.Master,
+      description: 'nice modeling',
+      video_resolution: VideoResolution._720p,
+      videoOut: video + 'blender_art/low_poly_character_part1.mp4',
+    },
+    low_poly_character2: {
+      name: 'low_poly_character2',
+      link: 'TmG--ekuThc',
+      quality: Quality.Ok,
+      rating: Rating.Master,
+      description: 'nice modeling',
+      video_resolution: VideoResolution._720p,
+      videoOut: video + 'blender_art/low_poly_character_part2.mp4',
+    },
+    low_poly_character3: {
+      name: 'low_poly_character3',
+      link: 'zJzZYo59Kgg',
+      quality: Quality.Ok,
+      rating: Rating.Master,
+      description: 'nice modeling',
+      video_resolution: VideoResolution._720p,
+      videoOut: video + 'blender_art/low_poly_character_part3.mp4',
+    },
+  },
 }
 
 export function getCurrentItem() {
-  const item = lib.robert_kiyosaki.rich_dad_poor_dad
+  const item = lib.blender_art.low_poly_character3
   if (!item) throw new Error('No such item in data!')
   return item
 }

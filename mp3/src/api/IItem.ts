@@ -10,5 +10,5 @@ export interface IItem {
   description: string
   video_resolution: VideoResolution
   videoOut: string
-  audioOut: string
+  audioOut?: string
 }
