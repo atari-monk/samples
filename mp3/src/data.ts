@@ -94,10 +94,22 @@ const lib: ILib = {
       videoOut: video + 'blender_art/low_poly_character_part3.mp4',
     },
   },
+  shakespeare: {
+    king_lear: {
+      name: 'king_lear',
+      link: 'Pdn07wgUrno',
+      quality: Quality.Vintage,
+      rating: Rating.Master,
+      description: 'fancy theather play',
+      video_resolution: VideoResolution._720p,
+      videoOut: video + 'shakespeare/king_lear.mp4',
+      audioOut: audio + 'shakespeare/king_lear.mp3',
+    },
+  },
 }
 
 export function getCurrentItem() {
-  const item = lib.blender_art.low_poly_character3
+  const item = lib.shakespeare.king_lear
   if (!item) throw new Error('No such item in data!')
   return item
 }

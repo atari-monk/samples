@@ -4,3 +4,4 @@ export type Character =
   | 'ian_mcklellen'
   | 'robert_kiyosaki'
   | 'blender_art'
+  | 'shakespeare'
