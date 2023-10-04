@@ -105,11 +105,21 @@ const lib: ILib = {
       videoOut: video + 'shakespeare/king_lear.mp4',
       audioOut: audio + 'shakespeare/king_lear.mp3',
     },
+    macbeth: {
+      name: 'macbeth',
+      link: 'IgEshHhnLqU',
+      quality: Quality.Vintage,
+      rating: Rating.Master,
+      description: 'fancy theather play',
+      video_resolution: VideoResolution._720p,
+      videoOut: video + 'shakespeare/macbeth.mp4',
+      audioOut: audio + 'shakespeare/macbeth.mp3',
+    },
   },
 }
 
 export function getCurrentItem() {
-  const item = lib.shakespeare.king_lear
+  const item = lib.shakespeare.macbeth
   if (!item) throw new Error('No such item in data!')
   return item
 }
