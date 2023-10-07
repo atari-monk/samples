@@ -5,3 +5,4 @@ export type Character =
   | 'robert_kiyosaki'
   | 'blender_art'
   | 'shakespeare'
+  | 'imphenzia'

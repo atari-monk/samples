@@ -116,10 +116,22 @@ const lib: ILib = {
       audioOut: audio + 'shakespeare/macbeth.mp3',
     },
   },
+  imphenzia: {
+    full_character: {
+      name: 'full_character',
+      link: 'PTWV67qUX2k',
+      quality: Quality.Ok,
+      rating: Rating.Fun,
+      description: 'full character modeling',
+      video_resolution: VideoResolution._720p,
+      videoOut: video + 'imphenzia/full_character.mp4',
+      audioOut: audio + 'imphenzia/full_character.mp3',
+    },
+  },
 }
 
 export function getCurrentItem() {
-  const item = lib.shakespeare.macbeth
+  const item = lib.imphenzia.full_character
   if (!item) throw new Error('No such item in data!')
   return item
 }

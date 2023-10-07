@@ -7,6 +7,8 @@ export type ArtForBlenderArt =
   | 'low_poly_character2'
   | 'low_poly_character3'
 export type ArtForShakespeare = 'king_lear' | 'macbeth'
+export type ArtForImphenzia = 'full_character'
+
 export type Art =
   | ArtForBukowski
   | ArtForHopkins
@@ -14,3 +16,4 @@ export type Art =
   | ArtForKiyosaki
   | ArtForBlenderArt
   | ArtForShakespeare
+  | ArtForImphenzia
