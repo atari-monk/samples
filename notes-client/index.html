@@ -9,6 +9,9 @@
       <label for="fileTitle">File Title:</label>
       <input type="text" id="fileTitle" name="fileTitle" required /><br /><br />
 
+      <label for="section">Section:</label>
+      <input type="text" id="section" name="section" required /><br /><br />
+
       <label for="question">Question:</label>
       <input type="text" id="question" name="question" required /><br /><br />
 
@@ -18,20 +21,6 @@
       <input type="submit" value="Submit" />
     </form>
 
-    <script>
-      // Add JavaScript to dynamically set the form's action URL
-      const form = document.getElementById('noteForm')
-
-      form.addEventListener('submit', function (event) {
-        event.preventDefault()
-
-        const fileTitle = document.getElementById('fileTitle').value
-        const actionUrl = `http://localhost:3000/append/${fileTitle}.json`
-        form.action = actionUrl
-
-        // Now submit the form
-        form.submit()
-      })
-    </script>
+    <script src="form.js"></script>
   </body>
 </html>
