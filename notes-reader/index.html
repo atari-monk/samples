@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JSON Reader</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .card {
+      background-color: #f7f7f7;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .code-block {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>JSON Reader</h1>
+
+  <h2>Upload JSON File:</h2>
+  <input type="file" id="fileInput" accept=".json">
+  
+  <h2>Question and Answer:</h2>
+  <div id="jsonContainer"></div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const jsonContainer = document.getElementById('jsonContainer');
+
+    function parseAnswer(answer) {
+      const codeRegex = /```(.*?)```/gs;
+      const parts = answer.split(codeRegex);
+      const elements = [];
+      
+      for (let i = 0; i < parts.length; i++) {
+        if (i % 2 === 0) {
+          // Text outside code block
+          const text = parts[i];
+          elements.push(document.createTextNode(text));
+        } else {
+          // Code block
+          const codeBlock = document.createElement('pre');
+          codeBlock.classList.add('code-block');
+          codeBlock.textContent = parts[i];
+          elements.push(codeBlock);
+        }
+      }
+      
+      return elements;
+    }
+
+    fileInput.addEventListener('change', function () {
+      jsonContainer.innerHTML = ''; // Clear previous cards
+      const file = fileInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const jsonData = JSON.parse(event.target.result);
+          jsonData.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `<h3>Object ${index + 1}</h3>`;
+            card.innerHTML += `<p><strong>Question:</strong> ${item.question}</p>`;
+            card.innerHTML += `<p><strong>Answer:</strong></p>`;
+            
+            const answerElements = parseAnswer(item.answer);
+            answerElements.forEach(element => {
+              card.appendChild(element);
+            });
+            
+            jsonContainer.appendChild(card);
+          });
+        };
+        reader.readAsText(file);
+      } else {
+        jsonContainer.textContent = 'No file selected.';
+      }
+    });
+  </script>
+</body>
+</html>
