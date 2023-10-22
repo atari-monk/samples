@@ -1,10 +1,13 @@
-const fileInput = document.getElementById('fileInput')
-const jsonContainer = document.getElementById('jsonContainer')
+import './css/styles.css'
 
-function parseAnswer(answer) {
+const fileInput = document.getElementById('fileInput') as HTMLInputElement
+const jsonContainer = document.getElementById('jsonContainer') as HTMLElement
+const index = document.getElementById('index') as HTMLElement
+
+function parseAnswer(answer: string) {
   const codeRegex = /```(.*?)```/gs
   const parts = answer.split(codeRegex)
-  const elements = []
+  const elements: (HTMLElement | Text)[] = []
 
   for (let i = 0; i < parts.length; i++) {
     if (i % 2 === 0) {
@@ -23,15 +26,20 @@ function parseAnswer(answer) {
   return elements
 }
 
-fileInput.addEventListener('change', function () {
+fileInput.addEventListener('change', function (event) {
   jsonContainer.innerHTML = '' // Clear previous cards
   index.innerHTML = '' // Clear previous index
 
-  const file = fileInput.files[0]
+  const file = fileInput.files?.[0]
   if (file) {
     const reader = new FileReader()
     reader.onload = function (event) {
-      const jsonData = JSON.parse(event.target.result)
+      const jsonData: {
+        sections: {
+          title: string
+          questions: { question: string; answer: string }[]
+        }[]
+      } = JSON.parse(event.target?.result as string)
 
       jsonData.sections.forEach((section, sectionIndex) => {
         // Create an entry in the index for each section

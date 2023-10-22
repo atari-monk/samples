@@ -1,13 +1,22 @@
-// Add JavaScript to dynamically set the form's action URL
-const form = document.getElementById('noteForm')
+import './css/styles.css'
+
+// Add TypeScript to dynamically set the form's action URL
+const form = document.getElementById('noteForm') as HTMLFormElement
 
 form.addEventListener('submit', function (event) {
   event.preventDefault()
 
-  const fileTitle = document.getElementById('fileTitle').value
-  const section = document.getElementById('section').value // Capture section here
-  const question = document.getElementById('question').value
-  const answer = document.getElementById('answer').value
+  const fileTitleInput = document.getElementById(
+    'fileTitle'
+  ) as HTMLInputElement
+  const sectionInput = document.getElementById('section') as HTMLInputElement
+  const questionInput = document.getElementById('question') as HTMLInputElement
+  const answerInput = document.getElementById('answer') as HTMLTextAreaElement
+
+  const fileTitle = fileTitleInput.value
+  const section = sectionInput.value
+  const question = questionInput.value
+  const answer = answerInput.value
 
   console.log('Data to be sent:', {
     fileTitle,

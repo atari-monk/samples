@@ -8,48 +8,63 @@ export async function prepareData(
   answer: string
 ): Promise<NotesData> {
   try {
-    let notesData: NotesData = {
-      sections: [
-        {
-          title: 'Default Section',
-          questions: [],
-        },
-      ],
-    }
+    const existingData = await readData(filePath)
 
-    try {
-      const data = await fs.readFile(filePath, 'utf8')
-      notesData = JSON.parse(data)
-    } catch (err) {
-      // If the file doesn't exist, notesData remains with default values
-    }
-
-    // Create a new note object with the specified fields
     const newNote: Note = {
       question,
       answer,
       dateTime: new Date().toISOString(),
     }
 
-    // Check if the section provided in the form exists in notesData
-    const sectionIndex = notesData.sections.findIndex(
-      (s) => s.title === section
-    )
+    const updatedData = updateData(existingData, section, newNote)
 
-    if (sectionIndex !== -1) {
-      // Append the new note to the existing section data
-      notesData.sections[sectionIndex].questions.push(newNote)
-    } else {
-      // If the section doesn't exist, create a new section
-      const newSection: Section = {
-        title: section,
-        questions: [newNote],
-      }
-      notesData.sections.push(newSection)
-    }
+    await writeData(filePath, updatedData)
 
-    return notesData
+    return updatedData
   } catch (err) {
     throw err
   }
+}
+
+async function readData(filePath: string): Promise<NotesData> {
+  try {
+    const data = await fs.readFile(filePath, 'utf8')
+    return JSON.parse(data)
+  } catch (err) {
+    // If the file doesn't exist, return default values
+    return {
+      sections: [
+        // {
+        //   title: 'Default Section',
+        //   questions: [],
+        // },
+      ],
+    }
+  }
+}
+
+function updateData(
+  existingData: NotesData,
+  section: string,
+  newNote: Note
+): NotesData {
+  const sectionIndex = existingData.sections.findIndex(
+    (s) => s.title === section
+  )
+
+  if (sectionIndex !== -1) {
+    existingData.sections[sectionIndex].questions.push(newNote)
+  } else {
+    const newSection: Section = {
+      title: section,
+      questions: [newNote],
+    }
+    existingData.sections.push(newSection)
+  }
+
+  return existingData
+}
+
+async function writeData(filePath: string, data: NotesData): Promise<void> {
+  await fs.writeFile(filePath, JSON.stringify(data, null, 2))
 }
