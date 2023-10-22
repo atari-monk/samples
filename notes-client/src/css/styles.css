@@ -1,46 +1,136 @@
-/* Light mode styles */
-body {
-  background-color: #f5f5f5;
-  color: #333;
+* {
+  margin: 0;
+  padding: 0;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: rgb(253, 248, 248);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h2 {
+  text-align: center;
+  display: block;
+  margin-bottom: 20px;
+  color: black;
+}
+
+/* Form styles */
+form {
+  width: 90%;
+  margin: 15px; /* Center the form horizontally */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #dad4d4;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form labels */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Form inputs */
 input[type='text'],
 textarea {
-  background-color: #fff;
-  color: #333;
+  width: 95%;
+  padding: 10px;
+  margin-left: 5px;
+  margin-right: 15px;
+  background-color: #f8ebeb;
   border: 1px solid #ccc;
+  border-radius: 3px;
 }
 
-/* Dark mode styles */
-body.dark-mode {
-  background-color: #333;
-  color: #f5f5f5;
+#fileTitle {
+  width: 300px;
 }
 
-body.dark-mode input[type='text'],
-body.dark-mode textarea {
-  background-color: #222;
-  color: #f5f5f5;
-  border: 1px solid #444;
+#section {
+  width: 300px;
 }
 
-/* Dark mode toggle button */
+#answer {
+  height: 500px;
+  resize: none;
+}
+
 .dark-mode-toggle {
   display: flex;
   align-items: center;
-  position: fixed;
-  top: 10px;
-  right: 10px;
+  position: relative;
+  margin: 20px;
   background-color: #333;
   color: #f5f5f5;
   padding: 5px;
   border: none;
   cursor: pointer;
+  font-size: 16px;
 }
 
-/* Dark mode icon (you can use an appropriate icon) */
 .dark-mode-toggle .icon {
   font-size: 24px;
 }
 
-/* Add more styles as needed */
+input[type='submit'] {
+  background-color: #0056b3;
+  color: #f5f5f5;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 20px;
+
+  margin: 0 auto;
+  display: block;
+}
+
+input[type='submit']:hover {
+  background-color: #007bff;
+}
+
+/* dark-mode */
+body.dark-mode {
+  background-color: black;
+  color: #f5f5f5;
+}
+
+body.dark-mode h2 {
+  color: #f5f5f5;
+}
+
+body.dark-mode form {
+  background-color: #222;
+  color: #f5f5f5;
+  border: 1px solid #444;
+  box-shadow: none;
+}
+
+body.dark-mode label {
+  color: #f5f5f5;
+}
+
+body.dark-mode input[type='text'],
+body.dark-mode textarea {
+  background-color: #111!important;
+  color: #f5f5f5!important;
+  border: 1px solid #444!important;
+}
+
+body.dark-mode input[type='submit'] {
+  background-color: #0056b3;
+  font-size: 20px;
+}
+
+body.dark-mode input[type='submit']:hover {
+  background-color: #007bff;
+}
