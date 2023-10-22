@@ -1,5 +1,7 @@
+import { DarkModeToggler } from './DarkModeToggler'
 import './css/styles.css'
 
+new DarkModeToggler()
 // Add TypeScript to dynamically set the form's action URL
 const form = document.getElementById('noteForm') as HTMLFormElement
 
