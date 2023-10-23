@@ -13,7 +13,10 @@ function parseAnswer(answer: string) {
     if (i % 2 === 0) {
       // Text outside code block
       const text = parts[i]
-      elements.push(document.createTextNode(text))
+      const div = document.createElement('div')
+      div.innerText = text
+      elements.push(div)
+      //elements.push(document.createTextNode(text))
     } else {
       // Code block
       const codeBlock = document.createElement('pre')
