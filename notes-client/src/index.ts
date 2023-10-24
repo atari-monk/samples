@@ -4,8 +4,8 @@ import './css/styles.css'
 
 new DarkModeToggler()
 
-// Function to handle form submission
-function handleSubmit(event: Event) {
+// Async function to handle form submission
+async function handleSubmit(event: Event) {
   event.preventDefault()
 
   const fileTitleInput = document.getElementById(
@@ -39,25 +39,24 @@ function handleSubmit(event: Event) {
 
   console.log('Note object:', note)
 
-  // Now submit the form with JSON data
-  fetch(actionUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(note),
-  })
-    .then((response) => {
-      if (response.status === 200) {
-        alert('Note submitted successfully!')
-        ;(event.target as HTMLFormElement).reset()
-      } else {
-        alert('Error submitting note.')
-      }
+  try {
+    const response = await fetch(actionUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(note),
     })
-    .catch((error) => {
-      alert('Error submitting note: ' + error.message)
-    })
+
+    if (response.status === 200) {
+      alert('Note submitted successfully!')
+      ;(event.target as HTMLFormElement).reset()
+    } else {
+      alert('Error submitting note.')
+    }
+  } catch (error: any) {
+    alert('Error submitting note: ' + error.message)
+  }
 }
 
 // Get the form element
