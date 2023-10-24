@@ -6,9 +6,13 @@ module.exports = () => {
   return {
     mode: 'development',
     devtool: false,
-    entry: './src/index.ts',
+    entry: {
+      index: './src/index.ts',
+      submit: './src/submit.ts',
+      edit: './src/edit.ts',
+    },
     output: {
-      filename: 'index.js',
+      filename: '[name].js',
       path: path.resolve(__dirname, 'build'),
     },
     resolve: {
@@ -40,7 +44,11 @@ module.exports = () => {
     },
     plugins: [
       new CopyWebpackPlugin({
-        patterns: [{ from: 'src/index.html', to: 'index.html' }],
+        patterns: [
+          { from: 'src/index.html', to: 'index.html' },
+          { from: 'src/edit.html', to: 'edit.html' },
+          { from: 'src/submit.html', to: 'submit.html' },
+        ],
       }),
       new MiniCssExtractPlugin({
         filename: 'styles.css',
