@@ -1,11 +1,11 @@
 import { DarkModeToggler } from './DarkModeToggler'
+import { INoteData } from './INoteData'
 import './css/styles.css'
 
 new DarkModeToggler()
-// Add TypeScript to dynamically set the form's action URL
-const form = document.getElementById('noteForm') as HTMLFormElement
 
-form.addEventListener('submit', function (event) {
+// Function to handle form submission
+function handleSubmit(event: Event) {
   event.preventDefault()
 
   const fileTitleInput = document.getElementById(
@@ -30,11 +30,11 @@ form.addEventListener('submit', function (event) {
   const actionUrl = `http://localhost:3000/append/${fileTitle}.json`
 
   // Create a note object with section included
-  const note = {
+  const note: INoteData = {
+    fileTitle,
     section, // Include section in the note object
     question,
     answer,
-    dateTime: new Date().toISOString(),
   }
 
   console.log('Note object:', note)
@@ -50,7 +50,7 @@ form.addEventListener('submit', function (event) {
     .then((response) => {
       if (response.status === 200) {
         alert('Note submitted successfully!')
-        form.reset()
+        ;(event.target as HTMLFormElement).reset()
       } else {
         alert('Error submitting note.')
       }
@@ -58,4 +58,10 @@ form.addEventListener('submit', function (event) {
     .catch((error) => {
       alert('Error submitting note: ' + error.message)
     })
-})
+}
+
+// Get the form element
+const form = document.getElementById('noteForm') as HTMLFormElement
+
+// Add a submit event listener to the form
+form.addEventListener('submit', handleSubmit)

@@ -61,7 +61,7 @@ fileInput.addEventListener('change', function (event) {
         section.questions.forEach((item, questionIndex) => {
           const card = document.createElement('div')
           card.classList.add('card')
-          card.innerHTML = `<h3>Object ${questionIndex + 1}</h3>`
+          //card.innerHTML = `<h3>Object ${questionIndex + 1}</h3>`
           card.innerHTML += `<p><strong>Question:</strong> ${item.question}</p>`
           card.innerHTML += `<p><strong>Answer:</strong></p>`
 
