@@ -1,10 +1,14 @@
+import { TextToHTMLConverter } from '../converter/TextToHTMLConverter'
+
 export class AnswerCard {
   private sectionIndex: number
   private questionIndex: number
+  private converter: TextToHTMLConverter
 
   constructor(sectionIndex: number, questionIndex: number) {
     this.sectionIndex = sectionIndex
     this.questionIndex = questionIndex
+    this.converter = new TextToHTMLConverter()
   }
 
   createCard(question: string, answer: string): HTMLElement {
@@ -13,7 +17,9 @@ export class AnswerCard {
     card.innerHTML += `<p><strong>Question:</strong> ${question}</p>`
     card.innerHTML += `<p><strong>Answer:</strong></p>`
 
-    const answerElements = this.parseAnswer(answer)
+    const answerElements = this.parseAnswer(
+      this.converter.convertTextToHTML(answer)
+    )
     answerElements.forEach((element) => {
       card.appendChild(element)
     })
@@ -32,7 +38,7 @@ export class AnswerCard {
         // Text outside code block
         const text = parts[i]
         const div = document.createElement('div')
-        div.innerText = text
+        div.innerHTML = text
         elements.push(div)
       } else {
         // Code block
