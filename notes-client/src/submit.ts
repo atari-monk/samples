@@ -27,7 +27,7 @@ async function handleSubmit(event: Event) {
     answer,
   })
 
-  const actionUrl = `http://localhost:3000/append/${fileTitle}.json`
+  const actionUrl = `http://localhost:3000/notes/append/${fileTitle}.json`
 
   // Create a note object with section included
   const note: INoteData = {

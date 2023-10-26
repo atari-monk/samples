@@ -4,8 +4,9 @@
   "description": "",
   "scripts": {
     "build": "tsc",
-    "start": "node build/server.js",
-    "debug": "ndb build/server.js"
+    "debug": "ndb build/server.js",
+    "on": "node build/server.js",
+    "start": "tsc && node build/server.js"
   },
   "keywords": [],
   "author": "",
