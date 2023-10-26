@@ -1,33 +1,9 @@
+import { AnswerCard } from './AnswerCard'
 import './css/styles.css'
 
 const fileInput = document.getElementById('fileInput') as HTMLInputElement
 const jsonContainer = document.getElementById('jsonContainer') as HTMLElement
 const index = document.getElementById('index') as HTMLElement
-
-function parseAnswer(answer: string) {
-  const codeRegex = /```(.*?)```/gs
-  const parts = answer.split(codeRegex)
-  const elements: (HTMLElement | Text)[] = []
-
-  for (let i = 0; i < parts.length; i++) {
-    if (i % 2 === 0) {
-      // Text outside code block
-      const text = parts[i]
-      const div = document.createElement('div')
-      div.innerText = text
-      elements.push(div)
-      //elements.push(document.createTextNode(text))
-    } else {
-      // Code block
-      const codeBlock = document.createElement('pre')
-      codeBlock.classList.add('code-block')
-      codeBlock.textContent = parts[i]
-      elements.push(codeBlock)
-    }
-  }
-
-  return elements
-}
 
 fileInput.addEventListener('change', function (event) {
   jsonContainer.innerHTML = '' // Clear previous cards
@@ -59,18 +35,8 @@ fileInput.addEventListener('change', function (event) {
         sectionDiv.innerHTML = `<h3>${section.title}</h3>`
 
         section.questions.forEach((item, questionIndex) => {
-          const card = document.createElement('div')
-          card.classList.add('card')
-          //card.innerHTML = `<h3>Object ${questionIndex + 1}</h3>`
-          card.innerHTML += `<p><strong>Question:</strong> ${item.question}</p>`
-          card.innerHTML += `<p><strong>Answer:</strong></p>`
-
-          const answerElements = parseAnswer(item.answer)
-          answerElements.forEach((element) => {
-            card.appendChild(element)
-          })
-
-          sectionDiv.appendChild(card)
+          const answerCard = new AnswerCard(sectionIndex, questionIndex)
+          const card = answerCard.createCard(item.question, item.answer)
 
           // Add a link to the question in the index
           const questionLink = document.createElement('a')
@@ -78,8 +44,7 @@ fileInput.addEventListener('change', function (event) {
           questionLink.href = `#section-${sectionIndex}-question-${questionIndex}`
           sectionEntry.appendChild(questionLink)
 
-          // Add an ID to the question div
-          card.id = `section-${sectionIndex}-question-${questionIndex}`
+          sectionDiv.appendChild(card)
         })
 
         jsonContainer.appendChild(sectionDiv)
