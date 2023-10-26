@@ -1,4 +1,5 @@
-import { AnswerCard } from './AnswerCard'
+import { IndexComponent } from './components/IndexComponent'
+import { AnswerCard } from './components/AnswerCard'
 import './css/styles.css'
 
 const fileInput = document.getElementById('fileInput') as HTMLInputElement
@@ -20,16 +21,9 @@ fileInput.addEventListener('change', function (event) {
         }[]
       } = JSON.parse(event.target?.result as string)
 
-      jsonData.sections.forEach((section, sectionIndex) => {
-        // Create an entry in the index for each section
-        const sectionLink = document.createElement('a')
-        sectionLink.textContent = section.title
-        sectionLink.href = `#section-${sectionIndex}`
-        const sectionEntry = document.createElement('div')
-        sectionEntry.appendChild(sectionLink)
-        index.appendChild(sectionEntry)
+      const indexComponent = new IndexComponent(index)
 
-        // Create cards for each question and answer in the section
+      jsonData.sections.forEach((section, sectionIndex) => {
         const sectionDiv = document.createElement('div')
         sectionDiv.id = `section-${sectionIndex}`
         sectionDiv.innerHTML = `<h3>${section.title}</h3>`
@@ -38,15 +32,14 @@ fileInput.addEventListener('change', function (event) {
           const answerCard = new AnswerCard(sectionIndex, questionIndex)
           const card = answerCard.createCard(item.question, item.answer)
 
-          // Add a link to the question in the index
-          const questionLink = document.createElement('a')
-          questionLink.textContent = item.question
-          questionLink.href = `#section-${sectionIndex}-question-${questionIndex}`
-          sectionEntry.appendChild(questionLink)
-
           sectionDiv.appendChild(card)
         })
 
+        indexComponent.addSectionEntry(
+          sectionIndex,
+          section.title,
+          section.questions
+        )
         jsonContainer.appendChild(sectionDiv)
       })
     }
