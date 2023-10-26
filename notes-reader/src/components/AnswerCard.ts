@@ -1,14 +1,20 @@
+import { MultiLineConverter } from '../converter/MultiLineConverter'
 import { TextToHTMLConverter } from '../converter/TextToHTMLConverter'
 
 export class AnswerCard {
   private sectionIndex: number
   private questionIndex: number
   private converter: TextToHTMLConverter
+  private multiConverter: MultiLineConverter
 
   constructor(sectionIndex: number, questionIndex: number) {
     this.sectionIndex = sectionIndex
     this.questionIndex = questionIndex
     this.converter = new TextToHTMLConverter()
+    this.multiConverter = new MultiLineConverter()
+    this.multiConverter.addConverter(/```(.*?)```/gs, (text) => {
+      return `<pre class="code-block">${text}</pre>`
+    })
   }
 
   createCard(question: string, answer: string): HTMLElement {
@@ -17,38 +23,18 @@ export class AnswerCard {
     card.innerHTML += `<p><strong>Question:</strong> ${question}</p>`
     card.innerHTML += `<p><strong>Answer:</strong></p>`
 
-    const answerElements = this.parseAnswer(
-      this.converter.convertTextToHTML(answer)
-    )
-    answerElements.forEach((element) => {
-      card.appendChild(element)
-    })
+    const answer1 = this.converter.convertTextToHTML(answer)
+    //const answer2 = this.multiConverter.convert(answer1)
+    const answerDiv = this.createDiv(answer1)
+    card.appendChild(answerDiv)
 
     card.id = `section-${this.sectionIndex}-question-${this.questionIndex}`
     return card
   }
 
-  private parseAnswer(answer: string): (HTMLElement | Text)[] {
-    const codeRegex = /```(.*?)```/gs
-    const parts = answer.split(codeRegex)
-    const elements: (HTMLElement | Text)[] = []
-
-    for (let i = 0; i < parts.length; i++) {
-      if (i % 2 === 0) {
-        // Text outside code block
-        const text = parts[i]
-        const div = document.createElement('div')
-        div.innerHTML = text
-        elements.push(div)
-      } else {
-        // Code block
-        const codeBlock = document.createElement('pre')
-        codeBlock.classList.add('code-block')
-        codeBlock.textContent = parts[i]
-        elements.push(codeBlock)
-      }
-    }
-
-    return elements
+  private createDiv(answer: string): Node {
+    const div = document.createElement('div')
+    div.innerHTML = answer
+    return div
   }
 }
