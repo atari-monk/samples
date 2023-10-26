@@ -1,5 +1,5 @@
 // Define the data structure types
-export interface QuestionData {
+export interface IQuestionData {
   question: string
   answer: string
 }

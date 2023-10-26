@@ -1,6 +1,6 @@
 import { IndexComponent } from './components/IndexComponent'
 import './css/styles.css'
-import { JsonData } from './JsonData'
+import { IJsonData } from './model/IJsonData'
 import { SectionComponent } from './components/SectionComponent'
 
 const fileInput = document.getElementById('fileInput') as HTMLInputElement
@@ -12,7 +12,7 @@ fileInput.addEventListener('change', function (_event) {
   if (file) {
     const reader = new FileReader()
     reader.onload = function (event) {
-      const jsonData: JsonData = JSON.parse(event.target?.result as string)
+      const jsonData: IJsonData = JSON.parse(event.target?.result as string)
       handleFileLoad(jsonData)
     }
     reader.readAsText(file)
@@ -21,7 +21,7 @@ fileInput.addEventListener('change', function (_event) {
   }
 })
 
-function handleFileLoad(data: JsonData) {
+function handleFileLoad(data: IJsonData) {
   jsonContainer.innerHTML = ''
   index.innerHTML = ''
 

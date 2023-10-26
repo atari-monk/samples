@@ -1,5 +1,5 @@
 export class TextToHTMLConverter {
-  private converters: Converter[]
+  private converters: IConverter[]
 
   constructor() {
     this.converters = [
