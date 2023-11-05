@@ -8,6 +8,7 @@ export type ArtForBlenderArt =
   | 'low_poly_character3'
 export type ArtForShakespeare = 'king_lear' | 'macbeth'
 export type ArtForImphenzia = 'full_character'
+export type ArtForMusic = 'red_dead_redemption_2_official_soundtrack'
 
 export type Art =
   | ArtForBukowski
@@ -17,3 +18,4 @@ export type Art =
   | ArtForBlenderArt
   | ArtForShakespeare
   | ArtForImphenzia
+  | ArtForMusic

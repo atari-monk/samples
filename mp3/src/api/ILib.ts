@@ -1,6 +1,6 @@
-import { Character } from './Character'
+import { Category } from './Category'
 import { IItemMap } from './IItemMap'
 
 export type ILib = {
-  [K in Character]: IItemMap
+  [K in Category]: IItemMap
 }

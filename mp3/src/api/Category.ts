@@ -1,4 +1,4 @@
-export type Character =
+export type Category =
   | 'charles_bukowski'
   | 'anthony_hopkins'
   | 'ian_mcklellen'
@@ -6,3 +6,4 @@ export type Character =
   | 'blender_art'
   | 'shakespeare'
   | 'imphenzia'
+  | 'music'

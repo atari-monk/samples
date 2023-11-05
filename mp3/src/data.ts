@@ -128,10 +128,22 @@ const lib: ILib = {
       audioOut: audio + 'imphenzia/full_character.mp3',
     },
   },
+  music: {
+    red_dead_redemption_2_official_soundtrack: {
+      name: 'red_dead_redemption_2_official_soundtrack',
+      link: 'McnMsFwZlvA',
+      quality: Quality.Ok,
+      rating: Rating.Fun,
+      description: 'game soudtrack',
+      video_resolution: VideoResolution._1080p,
+      videoOut: video + 'music/red_dead_redemption_2_official_soundtrack.mp4',
+      audioOut: audio + 'music/red_dead_redemption_2_official_soundtrack.mp3',
+    },
+  },
 }
 
 export function getCurrentItem() {
-  const item = lib.imphenzia.full_character
+  const item = lib.music.red_dead_redemption_2_official_soundtrack
   if (!item) throw new Error('No such item in data!')
   return item
 }
