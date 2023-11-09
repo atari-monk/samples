@@ -6,6 +6,10 @@ export function getCreatures() {
   return creatures // Return the array of creatures
 }
 
+export function getCreaturesCount() {
+  return creatures.length
+}
+
 // Function to generate random creatures
 export function generateCreature(canvas) {
   const creature = {

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Games</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #fff;
+        color: #222;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      body.dark-mode {
+        background-color: #222;
+        color: #fff;
+      }
+
+      a {
+        color: #3498db;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      a:hover {
+        color: #2980b9;
+      }
+
+      #links-container {
+        margin: 50px;
+      }
+
+      #dark-mode-toggle {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        color: #222;
+        text-decoration: underline;
+      }
+
+      body.dark-mode #dark-mode-toggle {
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body class="dark-mode">
+    <div id="dark-mode-toggle">Toggle Dark Mode</div>
+    <div id="links-container">
+      <h1>Mini Games</h1>
+      <ul>
+        <li><a href="./eat-game/index.html">Eat Game</a></li>
+      </ul>
+    </div>
+
+    <script>
+      const body = document.body
+      const darkModeToggle = document.getElementById('dark-mode-toggle')
+
+      darkModeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode')
+      })
+    </script>
+  </body>
+</html>
