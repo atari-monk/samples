@@ -1,4 +1,5 @@
-// creatures.js
+import * as ui from './ui.js'
+
 const creatures = [] // Create an array to store creatures
 
 export function getCreatures() {
@@ -14,6 +15,14 @@ export function generateCreature(canvas) {
     color: getRandomColor(),
   }
   creatures.push(creature)
+}
+
+export function initialize(n) {
+  const maxCreatures = 100
+
+  for (let i = 0; i < n && getCreatures().length < maxCreatures; i++) {
+    generateCreature(ui.canvas)
+  }
 }
 
 // Function to get a random color
@@ -34,4 +43,10 @@ export function drawCreatures(ctx) {
     ctx.closePath()
     ctx.fill()
   }
+}
+
+export function update() {}
+
+export function draw() {
+  drawCreatures(ui.ctx)
 }

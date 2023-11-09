@@ -1,4 +1,6 @@
 import * as ui from './ui.js'
+import * as creatures from './creatures.js'
+import * as input from './input.js'
 
 export const boat = {
   x: ui.canvas.width / 2, // Initial X position
@@ -77,4 +79,25 @@ export function handleBoatInteractions(boat, creatures) {
       }
     }
   }
+}
+
+function boatLives() {
+  // Check if the ship has run out of lives
+  if (boat.lives <= 0) {
+    // Game over logic can be added here
+    // For now, we'll simply reset the ship and its lives
+    boat.lives = 3
+    boat.width = 40
+    boat.height = 40
+  }
+}
+
+export function update() {
+  moveBoat(boat, input, ui.canvas)
+  handleBoatInteractions(boat, creatures)
+  boatLives()
+}
+
+export function draw() {
+  drawBoat(ui.ctx, boat)
 }
