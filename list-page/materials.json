@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Bricks",
+    "quantity": 5000
+  },
+  {
+    "name": "Lumber",
+    "quantity": 10000
+  },
+  {
+    "name": "Concrete",
+    "quantity": 2000
+  },
+  {
+    "name": "Roof Tiles",
+    "quantity": 3000
+  },
+  {
+    "name": "Windows",
+    "quantity": 20
+  }
+]
