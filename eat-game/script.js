@@ -77,13 +77,19 @@ function update() {
     )
 
     // If the ship is bigger and collides with the creature, eat it
-    if (distance < boat.width / 2 && boat.width > creature.size) {
+    if (distance < boat.width / 2 && boat.width / 2 > creature.size) {
+      console.log('gain')
+      console.log('creature.size:', creature.size)
+      console.log('boat.width:', boat.width)
       creatures.getCreatures().splice(i, 1)
       boat.width += creature.size / 2
       boat.height += creature.size / 4
     } else {
       // If the creature is bigger and collides with the ship, the ship gets eaten
-      if (distance < creature.size && boat.width < creature.size) {
+      if (distance < creature.size && boat.width / 2 < creature.size) {
+        console.log('pain')
+        console.log('creature.size:', creature.size)
+        console.log('boat.width:', boat.width)
         boat.lives-- // Decrease the ship's lives
         if (boat.lives <= 0) {
           boat.lives = 0 // Ensure lives don't go negative
