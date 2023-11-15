@@ -141,10 +141,10 @@ const lib: ILib = {
     },
     meditate_like_a_witcher: {
       name: 'meditate_like_a_witcher',
-      link: '-MJi7T4lX80',
+      link: 'cgDe80oFkWU',
       quality: Quality.Ok,
       rating: Rating.Fun,
-      description: 'game soudtrack',
+      description: 'calm game soudtrack 1hr',
       video_resolution: VideoResolution.Highest,
       videoOut: video + 'music/meditate_like_a_witcher.mp4',
       audioOut: audio + 'music/meditate_like_a_witcher.mp3',

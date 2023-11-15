@@ -14,7 +14,7 @@ async function fetchVideoInfo(url: string) {
 }
 
 function LogVideoInfo(videoInfo: ytdl.videoInfo) {
-  console.log('VideoInfo Properties:', Object.keys(videoInfo).join(', '))
+  //console.log('VideoInfo Properties:', Object.keys(videoInfo).join(', '))
 
   console.log('Video Title:', videoInfo.videoDetails.title)
   console.log('Video Author:', videoInfo.videoDetails.author.name)
