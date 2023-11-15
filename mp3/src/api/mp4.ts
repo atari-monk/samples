@@ -23,10 +23,13 @@ function LogVideoInfo(videoInfo: ytdl.videoInfo) {
     videoInfo.videoDetails.lengthSeconds + ' seconds'
   )
   const uniqueFormats = new Set<string>()
+  uniqueFormats.add('[qualityLabel, quality, audioQuality, hasAudio]')
   videoInfo.formats.forEach((format) => {
-    uniqueFormats.add(format.qualityLabel)
+    uniqueFormats.add(
+      `[${format.qualityLabel}, ${format.quality}, ${format.audioQuality}, ${format.hasAudio}]`
+    )
   })
-  console.log('Video Formats:', [...uniqueFormats].join(', '))
+  console.log('Video Formats:', [...uniqueFormats].join('\n'))
 }
 
 export async function downloadMp4(): Promise<void> {
@@ -41,14 +44,24 @@ export async function downloadMp4(): Promise<void> {
         return
       }
 
-      const format = ytdl.chooseFormat(videoInfo.formats, {
-        quality: item.video_resolution,
-      })
+      const resolutions = [
+        //'1080p', 
+        '720p', 
+        'large',
+        'medium',
+        'small',
+        'tiny',
+      ]
+      const format = videoInfo.formats.find((f) =>
+        resolutions.includes(f.qualityLabel)
+      )
 
       if (!format) {
         reject('No valid format found for the video.')
         return
       }
+
+      console.log('Format:', format.quality)
 
       const videoStream = ytdl(url, { format })
 

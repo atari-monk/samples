@@ -145,7 +145,7 @@ const lib: ILib = {
       quality: Quality.Ok,
       rating: Rating.Fun,
       description: 'calm game soudtrack 1hr',
-      video_resolution: VideoResolution.Highest,
+      video_resolution: VideoResolution.Lowest,
       videoOut: video + 'music/meditate_like_a_witcher.mp4',
       audioOut: audio + 'music/meditate_like_a_witcher.mp3',
     },
