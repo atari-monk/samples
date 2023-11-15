@@ -22,10 +22,11 @@ function LogVideoInfo(videoInfo: ytdl.videoInfo) {
     'Video Duration:',
     videoInfo.videoDetails.lengthSeconds + ' seconds'
   )
-  console.log(
-    'Video Formats:',
-    videoInfo.formats.map((format) => format.qualityLabel).join(', ')
-  )
+  const uniqueFormats = new Set<string>()
+  videoInfo.formats.forEach((format) => {
+    uniqueFormats.add(format.qualityLabel)
+  })
+  console.log('Video Formats:', [...uniqueFormats].join(', '))
 }
 
 export async function downloadMp4(): Promise<void> {
@@ -53,14 +54,35 @@ export async function downloadMp4(): Promise<void> {
 
       const writableStream = fs.createWriteStream(item.videoOut)
 
+      // Initialize variables to track progress
+      let downloadedSize = 0
+      let totalSize = 0
+      let percent = totalSize !== 0 ? (downloadedSize / totalSize) * 100 : 0
+      console.log(`Download progress: ${percent.toFixed(2)}%`)
+
+      // Log progress every minute
+      const progressInterval = setInterval(() => {
+        percent = totalSize !== 0 ? (downloadedSize / totalSize) * 100 : 0
+        console.log(`Download progress: ${percent.toFixed(2)}%`)
+      }, 60 * 1000) // Report every minute
+
+      // Listen to the 'progress' event
+      videoStream.on('progress', (chunkLength, downloaded, total) => {
+        // Update downloadedSize and totalSize
+        downloadedSize = downloaded
+        totalSize = total
+      })
+
       videoStream.pipe(writableStream)
 
       writableStream.on('finish', () => {
+        clearInterval(progressInterval) // Clear interval on finish
         resolve()
         console.log(`Downloaded ${item.name} to ${item.videoOut}`)
       })
 
       videoStream.on('error', (error) => {
+        clearInterval(progressInterval) // Clear interval on error
         reject(error)
         console.error(`Error downloading ${item.name}: ${error}`)
       })
