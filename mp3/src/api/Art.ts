@@ -11,6 +11,7 @@ export type ArtForImphenzia = 'full_character'
 export type ArtForMusic =
   | 'red_dead_redemption_2_official_soundtrack'
   | 'meditate_like_a_witcher'
+  | 'best_classical'
 
 export type Art =
   | ArtForBukowski

@@ -44,17 +44,14 @@ export async function downloadMp4(): Promise<void> {
         return
       }
 
-      const resolutions = [
-        //'1080p', 
-        '720p', 
-        'large',
-        'medium',
-        'small',
-        'tiny',
-      ]
-      const format = videoInfo.formats.find((f) =>
-        resolutions.includes(f.qualityLabel)
-      )
+      const resolutions = ['1080p', '720p', '480p', '360p', '240p']
+      const audioQuality = ['AUDIO_QUALITY_MEDIUM']
+      const format = videoInfo.formats.find((f) => {
+        if (f.audioQuality) {
+          if (audioQuality.includes(f.audioQuality)) return true
+          return false
+        }
+      })
 
       if (!format) {
         reject('No valid format found for the video.')

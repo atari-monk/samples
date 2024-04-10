@@ -149,11 +149,21 @@ const lib: ILib = {
       videoOut: video + 'music/meditate_like_a_witcher.mp4',
       audioOut: audio + 'music/meditate_like_a_witcher.mp3',
     },
+    best_classical: {
+      name: 'classical',
+      link: 'jgpJVI3tDbY',
+      quality: Quality.Ok,
+      rating: Rating.Fun,
+      description: 'best',
+      video_resolution: VideoResolution.Small,
+      videoOut: video + 'music/best_classical.mp4',
+      audioOut: audio + 'music/best_classical.mp3',
+    },
   },
 }
 
 export function getCurrentItem() {
-  const item = lib.music.meditate_like_a_witcher
+  const item = lib.music.best_classical
   if (!item) throw new Error('No such item in data!')
   return item
 }
